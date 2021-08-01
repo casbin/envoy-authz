@@ -1,38 +1,36 @@
-# Deploying on k8s
-apiVersion: v1
-kind: Service
-metadata:
-  name: envoy-authz
-  labels:
-    app: envoy-authz
-spec:
-  ports:
-  - name: grpc
-    port: 9000
-    targetPort: 9000
-  selector:
-    app: envoy-authz
----
-# Injecting casbin admission to Istio
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: envoy-authz
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: envoy-authz
-  template:
-    metadata:
-      labels:
-        app: envoy-authz
-    spec:
-      containers:
-      - image: casbin/envoy-authz:1.0
-        imagePullPolicy: IfNotPresent
-        name: envoy-authz
-        ports:
-        - containerPort: 9000
----
-  
+filter_chains:
+    - filters:
+      - name: envoy.http_connection_manager
+        typed_config:  
+          "@type": type.googleapis.com/envoy.config.filter.network.http_connection_manager.v2.HttpConnectionManager
+          stat_prefix: ingress_http
+          codec_type: AUTO
+          route_config:
+            name: local_route
+            virtual_hosts:
+            - name: local_service
+              domains: ["*"]
+              routes:
+              - match:
+                  prefix: "/"
+                route: { host_rewrite: server.domain.com, cluster: service_backend  }
+          http_filters:
+          - name: envoy.ext_authz
+            config:
+              grpc_service:
+                envoy_grpc:
+                  cluster_name: envoy-authz
+                timeout: 0.5s
+  clusters:
+  - name: envoy-authz
+    type: static
+    http2_protocol_options: {}
+    load_assignment:
+      cluster_name: envoy-authz
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: 127.0.0.1
+                port_value: 9000  
