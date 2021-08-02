@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 <p align="center">
-    <img width="300" height="300" src="casbin-envoy-logo.png" alt="envoy-authz" />
+    <img width="400" height="400" src="casbin-envoy-logo.png" alt="envoy-authz" />
 </p>
 
 Envoy-authz is a middleware of Envoy which performs [external authorization](https://www.envoyproxy.io/docs/envoy/latest/intro/arch_overview/security/ext_authz_filter#arch-overview-ext-authz) through casbin. This proxy would be deployed on any type of envoy-based service meshes like Istio. One such example is implemented in [Istio-authz](https://github.com/casbin/istio-authz).
