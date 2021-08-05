@@ -6,14 +6,12 @@ import (
 	"log"
 	"net"
 	"os"
-	//"encoding/json"
 	"strings"
 	"encoding/base64"
 
-	//"github.com/dgrijalva/jwt-go"
+	
 	"golang.org/x/net/context"
-	"google.golang.org/grpc"	
-	//"github.com/golang/glog"
+	"google.golang.org/grpc"		
 	"github.com/casbin/casbin"
 	rpcstatus "google.golang.org/genproto/googleapis/rpc/status"
 	envoy_type "github.com/envoyproxy/go-control-plane/envoy/type/v3"
@@ -30,27 +28,10 @@ var (
 
 type AuthorizationServer struct{}
 
-/*func (a *AuthorizationServer) GetUserName(req *http.Request) string {
-	username, _, _ := req.BasicAuth()
-	return username
-}
-*/
-
 func (a *AuthorizationServer) Check(ctx context.Context, req *auth.CheckRequest) (*auth.CheckResponse, error) {
 	log.Println(">>> Server Performing authorization check!")
 	
 	e:= casbin.NewEnforcer("./example/model.conf", "./example/policy.csv")
-/*	if err != nil {
-		glog.Errorf("Filed to load the policies: %v", err)
-		
-	}
-*/
-/*	user, _, _ := req.BasicAuth()
-	method := req.Method
-	path := req.URL.Path
-*/
-//	user :=  a.GetUserName(req) 
-//	user, _, _ := json.Unmarshal(req.Attributes.Request.Http.Headers["authorization"].BasicAuth())
 
 	method := req.Attributes.Request.Http.Method
 	path := req.Attributes.Request.Http.Path
@@ -118,43 +99,6 @@ func (a *AuthorizationServer) Check(ctx context.Context, req *auth.CheckRequest)
 		},
 	}, nil
 	
-	//tokenvalue := strings.Split(tokenStr, ",")
-	//username := tokenvalue[1]
-	/*
-	if e.Enforce(username, path, method) {
-		return &auth.CheckResponse{
-			Status: &rpcstatus.Status{
-				Code: int32(rpc.OK),
-			},
-			HttpResponse: &auth.CheckResponse_OkResponse{
-				OkResponse: &auth.OkHttpResponse{
-					Headers: []*core.HeaderValueOption{
-						{
-							Header: &core.HeaderValue{
-								Key:   "casbin-authorized",
-								Value: "allowed",
-							},
-						},
-					},
-				},
-			},
-		}, nil
-	}else {
-		return &auth.CheckResponse{
-			Status: &rpcstatus.Status{
-				Code: int32(rpc.PERMISSION_DENIED),
-			},
-			HttpResponse: &auth.CheckResponse_DeniedResponse{
-				DeniedResponse: &auth.DeniedHttpResponse{
-					Status: &envoy_type.HttpStatus{
-						Code: envoy_type.StatusCode_Unauthorized,
-					},
-					Body: "PERMISSION_DENIED",
-				},
-			},
-		}, nil
-
-	}*/
 }
 
 
