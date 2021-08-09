@@ -1,0 +1,12 @@
+# admin have all priviliges
+p, admin, *, *
+
+# anyone could perform read-only operation
+p, *, *, get
+p, *, *, list
+
+# member could perform write operations
+p, member, /apps, create
+p, member, /memberlist, update
+p, member, /validate, patch
+p, member, /viewAll, delete
