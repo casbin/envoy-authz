@@ -8,7 +8,7 @@
     <img width="400" height="400" src="casbin-envoy-logo.png" alt="envoy-authz" />
 </p>
 
-Envoy-authz is a middleware of Envoy which performs [external authorization](https://www.envoyproxy.io/docs/envoy/latest/intro/arch_overview/security/ext_authz_filter#arch-overview-ext-authz) through casbin. This proxy would be deployed on any type of envoy-based service meshes like Istio. One such example is implemented in [Istio-authz](https://github.com/casbin/istio-authz).
+Envoy-authz is a middleware of Envoy which performs [external authorization](https://www.envoyproxy.io/docs/envoy/latest/intro/arch_overview/security/ext_authz_filter#arch-overview-ext-authz) through casbin. This proxy would be deployed on any type of envoy-based service meshes like Istio. 
 
 ## Installation
 
@@ -44,6 +44,9 @@ $ ./authz
 $  envoy -c authz.yaml -l info
 ```
 Once the envoy starts, it will start intercepting requests for the authorization process.
+
+## Integrating to Istio
+You need to send custom headers, which would contain usernames in the JWT token OF headers for this middleware to work. You can check the official [Istio docs](https://istio.io/v1.4/docs/tasks/policy-enforcement/control-headers/) to get more info on modifying `Request Headers`.
 
 ## Community
 
