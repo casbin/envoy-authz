@@ -1,7 +1,7 @@
 # envoy-authz
 
 [![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/casbin/envoy-authz/issues)
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/casbin/lobby)
+[![Discord](https://img.shields.io/discord/1022748306096537660?logo=discord&label=discord&color=5865F2)](https://discord.gg/S5UjpzGZjN)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 <p align="center">
@@ -50,5 +50,5 @@ You need to send custom headers, which would contain usernames in the JWT token 
 
 ## Community
 
-In case of any query, you can ask on our gitter [channel](https://gitter.im/casbin/lobby).
+In case of any query, you can ask on our [Discord](https://discord.gg/S5UjpzGZjN).
 
