@@ -30,7 +30,7 @@ go get github.com/casbin/envoy-authz
 The grpc server is based on protocol buffer from [external_auth.proto](https://github.com/envoyproxy/envoy/blob/master/api/envoy/service/auth/v2alpha/external_auth.proto). 
 
 ## Usage
-- Define the Casbin policies under config files by following this [guide](https://casbin.org/docs/en/how-it-works).
+- Define the Casbin policies under config files by following this [guide](https://casbin.org/docs/how-it-works).
 
 You can verify/test your policies on online [casbin-editor](https://casbin.org/editor/).
 
